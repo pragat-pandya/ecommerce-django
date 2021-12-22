@@ -19,6 +19,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'accounts',
     'category',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -57,6 +58,8 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'thekart.wsgi.application'
+
+AUTH_USER_MODEL = 'accounts.Account'
 
 # Tells Django that we are using specified custom user model for our project.
 
