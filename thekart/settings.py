@@ -53,6 +53,8 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                # makes menu_links function availabale in all the templates across the project.
+                'category.context_processors.menu_links',
             ],
         },
     },
