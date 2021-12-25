@@ -56,6 +56,8 @@ TEMPLATES = [
                 'django.contrib.messages.context_processors.messages',
                 # makes menu_links function availabale in all the templates across the project.
                 'category.context_processors.menu_links',
+                # makes counter function available across all views inside the function.
+                'carts.context_processors.counter',
             ],
         },
     },
