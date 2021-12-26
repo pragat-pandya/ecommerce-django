@@ -28,14 +28,15 @@
 					<div class="row">
 						<div class="item-option-select">
 							<h6>Choose Color</h6>
-							<select class="form-control" name="color">
-								<option value="red">Red</option>
-								<option value="yellow">Yellow</option>
-								<option value="green">Green</option>
+							<select class="form-control" name="color" required>
+								<option value="" selected disabled>Choose Color</option>
+								{% for i in single_product.variation_set.all %}
+								<option value="{{ i.variation_value }}">{{ i.variation_value }}</option>
+								{% endfor %}
 							</select>
 						</div>
 					</div> <!-- row.// -->
-					<div class="row">
+					<!--<div class="row">
 						<div class="item-option-select">
 							<h6>Select Size</h6>
 							<select class="form-control" name="size">
@@ -44,7 +45,7 @@
 								<option value="large">Large</option>
 							</select>
 						</div>
-					</div> <!-- row.// -->
+					</div> <!-- row.// - -->
 					<hr>
 				{% if single_product.stock <= 0 %}
 					<h5 class="text-danger">Out of Stock</h5>
