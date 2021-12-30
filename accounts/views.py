@@ -17,6 +17,7 @@ from django.core.mail import EmailMessage
 from carts.views import _cart_id
 from carts.models import Cart, CartItem
 
+import requests
 
 # Create your views here.
 def register (request):
@@ -69,11 +70,13 @@ def login (request):
                 is_cart_item_exists = CartItem.objects.filter(cart=cart).exists()
                 if is_cart_item_exists:
                     cart_item = CartItem.objects.filter(cart=cart)
-                    product_variation = []
+
                     # GETTING PRODUCT VATIATIONS BY CARTID
+                    product_variation = []
                     for item in cart_item:
                         variation = item.variations.all()
                         product_variation.append(list(variation))
+
                     # GET THE CART ITEMS FROM THE USER TO ACCESS HIS PRODUCT VARIATIONS
                     cart_item = CartItem.objects.filter(user=user)
                     id = []
@@ -82,6 +85,7 @@ def login (request):
                         exisiting_variation = item.variations.all()
                         ex_var_list.append(list(exisiting_variation))
                         id.append(item.id)
+
                     # GETING COMMON PRODUCT VATIATION IN product_variation and ex_var_list
                     for pr in product_variation:
                         if pr in ex_var_list:
@@ -100,7 +104,15 @@ def login (request):
                 pass
             auth.login(request, user)
             messages.success(request, 'You are now logged in.')
-            return redirect('dashboard')
+            url = request.META.get('HTTP_REFERER')
+            try:
+                query = requests.utils.urlparse(url).query
+                params = dict(x.split('=') for x in query.split('&'))
+                if 'next' in params:
+                    nextPage = params['next']
+                    return redirect (nextPage)
+            except:
+                return redirect('dashboard')
         else:
             messages.error(request, 'Invalid login credentials!')
             return redirect ('login')
