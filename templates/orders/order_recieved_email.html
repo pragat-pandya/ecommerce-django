@@ -1,0 +1,8 @@
+{% autoescape off %} <!--autoescape gives protection against cross sire scripting-->
+
+Hi {{user.first_name}},
+
+Your order has been recieved.
+Order Number: {{ order.order_number }}
+
+{% endautoescape %}
