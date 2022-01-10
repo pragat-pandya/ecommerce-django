@@ -3,6 +3,7 @@ from django.http import HttpResponse
 from carts.models import CartItem
 from .forms import OrderForm
 from .models import Order, Payment, OrderProduct
+from store.models import Product
 import datetime
 import json
 
@@ -48,11 +49,14 @@ def payments (request):
         orderproduct.save()
 
 
+        # Reduce the quantity of the sold Products
+        product = Product.objects.get(id=item.product_id)
+        product.stock -= item.quantity
+        product.save()
 
-    # Reduce the quantity of the sold Products
 
     # Clear kart
-
+    CartItem.objects.filter(user=request.user).delete()
     # Send order recieved email to customer
 
     # Send order number and transaction id back to sendData method via JSON response
