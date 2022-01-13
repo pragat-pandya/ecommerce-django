@@ -40,7 +40,12 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django_session_timeout.middleware.SessionTimeoutMiddleware',
 ]
+
+SESSION_EXPIRE_SESSIONS = config('SESSION_EXPIRE_SESSIONS', cast=int)
+SESSION_EXPIRE_AFTER_LAST_ACTIVITY = config('SESSION_EXPIRE_AFTER_LAST_ACTIVITY', cast=bool)
+SESSION_TIMEOUT_REDIRECT = 'accounts/login'
 
 ROOT_URLCONF = 'thekart.urls'
 
@@ -145,3 +150,4 @@ EMAIL_HOST_USER = config('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD') #past the key or password app here
 EMAIL_PORT = config('EMAIL_PORT', cast=int)
 EMAIL_USE_TLS = config('EMAIL_USE_TLS', cast=bool)
+DEFAULT_FROM_EMAIL = config('DEFAULT_FROM_EMAIL')
