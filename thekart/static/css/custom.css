@@ -58,3 +58,40 @@ ul.thumb li img{
   width: 80px;
   height: 1px solid grey;
 }
+
+
+
+/*Styling for footer*/
+.footer-hr {
+      width: 75%;
+      height: 5px;
+      margin-left: auto;
+      margin-right: auto;
+      background-color: white;
+
+  }
+  .footer-links {
+      text-decoration: none;
+      color: white;
+  }
+  .footer-links:hover {
+      text-decoration: none;
+      color: white;
+      font-weight: bold;
+  }
+  .footer-bar {
+      background-color: #181818;
+  }
+  .ugly {
+      text-decoration: none;
+      color: black;
+      opacity: 0.5;
+      font-size: small;
+  }
+  .ugly:hover {
+      text-decoration: none;
+      color: black;
+      opacity: 0.75;
+  }
+
+  
